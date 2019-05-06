@@ -1,0 +1,17 @@
+#+AUTHOR: jpdl@ufrj.br
+
+* ULA - Unidade Lógica Aritimética
+
+Nesta pasta estão contidos os códigos utilizados para a primeira etapa do trabalho prático da matéria de Sistemas Digitais - 2019.1 @ UFRJ.
+
+O trabalho consiste em implementar uma ULA de 4 bits e 8 operações.
+As operações escolhidas foram:
+
+- [X] AND
+- [X] OR
+- [X] XOR
+- [X] NOT
+- [ ] Complementa
+- [X] Soma 1
+- [X] Soma
+- [ ] Subtração
