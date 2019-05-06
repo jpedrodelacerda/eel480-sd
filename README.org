@@ -1,0 +1,15 @@
+#+TITLE: EEL480 - Sistemas Digitais
+#+AUTHOR: jpdl@ufrj.br
+
+* EEL480 - Sistemas Digitais
+
+Este repositório contém os códigos para o Trabalho Prático da disciplina EEL480 - Sistemas Digitais no período de 2019.1 @ UFRJ.
+
+Professores:
+- José Paulo Brafman
+- Luís Henrique M. K. Costa
+
+O trabalho é composto por duas etapas sendo a primeira delas, a implementação de uma ULA de 4 bits e 8 operações e a segunda parte um "jogo da forca" utilizando um teclado PS-2.
+
+O hardware utilizado no laboratório é o Kit Xilinx Spartan 3AN.
+> [[https://www.gta.ufrj.br/ensino/EEL480/spartan3/ug334.pdf][Manual Spartan-3AN]]
