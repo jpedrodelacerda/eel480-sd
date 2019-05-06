@@ -1,4 +1,3 @@
-#+TITLE: EEL480 - Sistemas Digitais
 #+AUTHOR: jpdl@ufrj.br
 
 * EEL480 - Sistemas Digitais
