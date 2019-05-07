@@ -1,16 +1,12 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
--- Defining entity ports
 entity fourBitAdder is
-  port ( x, y           : in STD_LOGIC_VECTOR (3 downto 0);
-         cin            : in STD_LOGIC;
-         cout, ov       : out STD_LOGIC;
-         sum            : out STD_LOGIC_VECTOR (3 downto 0));
+  port ( x, y                               : in STD_LOGIC_VECTOR (3 downto 0);
+         cin                                : in STD_LOGIC;
+         cout, zeroFlag, signFlag, ovFlag   : out STD_LOGIC;
+         sum                                : out STD_LOGIC_VECTOR (3 downto 0));
 end fourBitAdder;
-
--- Defining Architecture
 
 architecture Behavioral of fourBitAdder is
 
@@ -20,7 +16,7 @@ architecture Behavioral of fourBitAdder is
   -- Importing fullAdder
   component fullAdder
   port ( x, y, cin      : in STD_LOGIC;
-         cout, sum      : out STD_LOGIC;)
+         cout, sum      : out STD_LOGIC)
   end component;
 
 begin
@@ -30,7 +26,9 @@ begin
     FA(i): fullAdder port map (x(i), y(i), carries(i-1), carries(i),sum(i));
   end GENERATE;
 
-   ov <= carries(2) XOR carries(3);
-   cout <= carries(3);
+  zeroFlag <= NOT (output(0) OR output(1) OR output(2) OR output(3));
+  signFlag <= output(3);
+  ovFlag <= carries(2) XOR carries(3);
+  cout <= carries(3);
 
 end Behavioral;

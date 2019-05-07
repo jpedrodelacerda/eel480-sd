@@ -1,11 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
--- Defining entity ports
 entity xorGate is
-  port ( x, y           : in STD_LOGIC_VECTOR (3 downto 0);
-         output         : out STD_LOGIC_VECTOR (3 downto 0);
+  port ( x, y                 : in STD_LOGIC_VECTOR (3 downto 0);
+         output               : out STD_LOGIC_VECTOR (3 downto 0);
+         zeroFlag, signFlag   : out STD_LOGIC);
 end xorGate;
 
 architecture xorArch of xorGate is
@@ -19,4 +18,7 @@ begin
     end loop;
   end process;
 
+  zeroFlag <= NOT (output(0) OR output(1) OR output(2) OR output(3));
+  signFlag <= output(3);
+  
 end xorArch;  

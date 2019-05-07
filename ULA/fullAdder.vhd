@@ -1,14 +1,10 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
--- Defining entity ports
 entity fullAdder is
-  port ( x, y, cin      : in STD_LOGIC;
-         cout, sum      : out STD_LOGIC;)
-end Adder1Bit;
-
--- Defining Architecture
+  port ( x, y, cin  : in STD_LOGIC;
+         cout, sum  : out STD_LOGIC);
+end fullAdder;
 
 architecture Behavioral of fullAdder is
   
