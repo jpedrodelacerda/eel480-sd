@@ -31,7 +31,7 @@ begin
   -- Invert X and add one to it.
 
   invertLabel : inverter port map (x, inverted, zeroFlag, signFlag);
-  addOnelabel : addOne port map (x, '0', cout, zeroFlag, signFlag, ovFlag, twoComplemented);
+  addOnelabel : addOne port map (inverted, '0', cout, zeroFlag, signFlag, ovFlag, twoComplemented);
 
   output <= twosComplemented;
 
