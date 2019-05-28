@@ -33,6 +33,7 @@ entity twosComplementer is
     Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
            zeroFlag : out  STD_LOGIC;
            signFlag : out  STD_LOGIC;
+			  ovFlag : out STD_LOGIC;
            output : out  STD_LOGIC_VECTOR (3 downto 0));
 end twosComplementer;
 
@@ -40,6 +41,7 @@ architecture Behavioral of twosComplementer is
 
 component addOne is
     Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
+           cin : in  STD_LOGIC;
            cout : out  STD_LOGIC;
            zeroFlag : out  STD_LOGIC;
            signFlag : out  STD_LOGIC;
@@ -48,20 +50,20 @@ component addOne is
 end component;
 
 SIGNAL sumAdder : STD_LOGIC;
-SIGNAL coutAdder : STD_LOGIC;
 SIGNAL zeroFlagAdder : STD_LOGIC;
 SIGNAL signFlagAdder : STD_LOGIC;
 SIGNAL ovFlagAdder : STD_LOGIC;
 SIGNAL notX : STD_LOGIC_VECTOR(3 downto 0);
 
---SIGNAL oneAdder : STD_LOGIC_VECTOR(3 downto 0);
---SIGNAL zeroVector : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
+SIGNAL oneAdder : STD_LOGIC_VECTOR(3 downto 0);
+SIGNAL zeroVector : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
 
 
 begin
 
 	notX <= NOT x;
---	output <= notx;
-	label3: addOne port map (notX,coutAdder,zeroFlagAdder, signFlagAdder, ovFlagAdder, output);
+
+	label2: fourBitAdder port map (notX, zeroVector, '1', cout, zeroFlag, signFlag, ovFlag, sum);
 
 end Behavioral;
+

@@ -11,7 +11,7 @@ As operações escolhidas foram:
 - [X] OR
 - [X] XOR
 - [X] NOT
-- [ ] Complementa
+- [X] Complementa
 - [X] Soma 1
 - [X] Soma
-- [ ] Subtração
+- [X] Subtração

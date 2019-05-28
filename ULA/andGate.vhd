@@ -1,24 +1,52 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    12:54:04 05/21/2019 
+-- Design Name: 
+-- Module Name:    andGate - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
 entity andGate is
-  port ( x, y                 : in STD_LOGIC_VECTOR (3 downto 0);
-         output               : out STD_LOGIC_VECTOR (3 downto 0);
-         zeroFlag, signFlag   : out STD_LOGIC);
+    Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
+           y : in  STD_LOGIC_VECTOR (3 downto 0);
+           zeroFlag : out  STD_LOGIC;
+           signFlag : out  STD_LOGIC;
+           output : out  STD_LOGIC_VECTOR (3 downto 0));
 end andGate;
 
-architecture andArch of andGate is
+architecture Behavioral of andGate is
+
+	signal xANDy : STD_LOGIC_VECTOR (3 downto 0);
 
 begin
+	xANDy <= x AND y;
 
-  process(y, x)
-  begin
-    for i in 0 to 3 loop
-      output(i) <= x(i) AND y(i);
-    end loop;
-  end process;
+	zeroFlag <= NOT( xANDy(0) OR xANDy(1) OR xANDy(2) OR xANDy(3));
+	signFlag <= xANDy(3);
+	output 	<= xANDy;
 
-  zeroFlag <= NOT (output(0) OR output(1) OR output(2) OR output(3));
-  signFlag <= output(3);
+end Behavioral;
 
-end andArch;  

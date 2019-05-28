@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    13:34:07 05/21/2019 
+-- Create Date:    14:01:48 05/21/2019 
 -- Design Name: 
--- Module Name:    TwosComplementer - Behavioral 
+-- Module Name:    fourBitSubtractor - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,17 +29,28 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity twosComplementer is
+entity fourBitSubtractor is
+    Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
+           y : in  STD_LOGIC_VECTOR (3 downto 0);
+           borrowFlag : out  STD_LOGIC;
+           zeroFlag : out  STD_LOGIC;
+           signFlag : out  STD_LOGIC;
+           output : out  STD_LOGIC_VECTOR (3 downto 0));
+end fourBitSubtractor;
+
+architecture Behavioral of fourBitSubtractor is
+
+component twosComplementer is
     Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
            zeroFlag : out  STD_LOGIC;
            signFlag : out  STD_LOGIC;
            output : out  STD_LOGIC_VECTOR (3 downto 0));
-end twosComplementer;
+end component;
 
-architecture Behavioral of twosComplementer is
-
-component addOne is
+component fourBitAdder is
     Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
+           y : in  STD_LOGIC_VECTOR (3 downto 0);
+           cin : in  STD_LOGIC;
            cout : out  STD_LOGIC;
            zeroFlag : out  STD_LOGIC;
            signFlag : out  STD_LOGIC;
@@ -47,21 +58,22 @@ component addOne is
            sum : out  STD_LOGIC_VECTOR (3 downto 0));
 end component;
 
-SIGNAL sumAdder : STD_LOGIC;
-SIGNAL coutAdder : STD_LOGIC;
-SIGNAL zeroFlagAdder : STD_LOGIC;
-SIGNAL signFlagAdder : STD_LOGIC;
-SIGNAL ovFlagAdder : STD_LOGIC;
-SIGNAL notX : STD_LOGIC_VECTOR(3 downto 0);
-
---SIGNAL oneAdder : STD_LOGIC_VECTOR(3 downto 0);
---SIGNAL zeroVector : STD_LOGIC_VECTOR(3 downto 0) := (others => '0');
-
+SIGNAL borrow : STD_LOGIC;
+SIGNAL zeroFlagComp : STD_LOGIC;
+SIGNAL signFlagComp : STD_LOGIC;
+SIGNAL borrowFlagComp : STD_LOGIC;
+SIGNAL complemented : STD_LOGIC_VECTOR (3 downto 0);
 
 begin
 
-	notX <= NOT x;
---	output <= notx;
-	label3: addOne port map (notX,coutAdder,zeroFlagAdder, signFlagAdder, ovFlagAdder, output);
+-- Complementing the Y.
+complement: twosComplementer port map (y, zeroFlagComp, signFlagComp, complemented);
+
+--output <= complemented;
+
+-- X + (-Y):
+subctract: fourBitAdder port map (x, complemented, '0', borrow, zeroFlag, signFlag, borrowFlag, output);
+
 
 end Behavioral;
+

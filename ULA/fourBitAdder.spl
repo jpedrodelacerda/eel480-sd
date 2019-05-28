@@ -1,0 +1,11 @@
+[Inputs]
+cin
+=x[3:0]=
+=y[3:0]=
+[Outputs]
+cout
+zeroFlag
+signFlag
+ovFlag
+=sum[3:0]=
+[BiDir]

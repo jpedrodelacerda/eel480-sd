@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    12:58:55 05/21/2019 
+-- Create Date:    15:21:20 05/21/2019 
 -- Design Name: 
--- Module Name:    orGate - Behavioral 
+-- Module Name:    signalGenerator - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,27 +29,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity orGate is
-    Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
-           y : in  STD_LOGIC_VECTOR (3 downto 0);
-           zeroFlag : out  STD_LOGIC;
-           signFlag : out  STD_LOGIC;
-           output : out  STD_LOGIC_VECTOR (3 downto 0));
-end orGate;
+entity signalGenerator is
+    Port ( CLK : in STD_LOGIC;
+			  limit : in integer range 3000000000 downto 0;
+			  signals : out  STD_LOGIC_VECTOR (9 downto 0));
+end signalGenerator;
 
-architecture Behavioral of orGate is
+architecture Behavioral of signalGenerator is
 
-	signal xORy : STD_LOGIC_VECTOR (3 downto 0);
+-- Initial count
+SIGNAL count : integer range 3000000000 downto 0 := 0;
 
 begin
 
-	xORy <= x OR y;
+process(CLK)
 
-	zeroFlag <= NOT( xORy(0) OR xORy(1) OR xORy(2) OR xORy(3));
-	signFlag <= xORy(3);
-	output 	<= xORy;
+	if (CLK'event AND CLK = '1') then
+		countLabel: while (count < limit) loop
+			count <= count + '1' -- count up
+			end countLabel;
+			count = 0;		
+	end if;
 
-
+end process;
+	
 
 end Behavioral;
-

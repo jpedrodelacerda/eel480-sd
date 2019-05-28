@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    12:58:55 05/21/2019 
+-- Create Date:    13:08:54 05/21/2019 
 -- Design Name: 
--- Module Name:    orGate - Behavioral 
+-- Module Name:    notGate - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,27 +29,24 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity orGate is
+entity notGate is
     Port ( x : in  STD_LOGIC_VECTOR (3 downto 0);
-           y : in  STD_LOGIC_VECTOR (3 downto 0);
            zeroFlag : out  STD_LOGIC;
            signFlag : out  STD_LOGIC;
            output : out  STD_LOGIC_VECTOR (3 downto 0));
-end orGate;
+end notGate;
 
-architecture Behavioral of orGate is
+architecture Behavioral of notGate is
 
-	signal xORy : STD_LOGIC_VECTOR (3 downto 0);
+	signal notX : STD_LOGIC_VECTOR (3 downto 0);
 
 begin
 
-	xORy <= x OR y;
-
-	zeroFlag <= NOT( xORy(0) OR xORy(1) OR xORy(2) OR xORy(3));
-	signFlag <= xORy(3);
-	output 	<= xORy;
-
-
+	notX <= NOT x;
+	
+	zeroFlag <= NOT( notX(0) OR notX(1) OR notX(2) OR notX(3));
+	signFlag <= notX(3);
+	output 	<= notX;
 
 end Behavioral;
 

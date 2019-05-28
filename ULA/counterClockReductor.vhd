@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    13:46:31 05/23/2019 
 -- Design Name: 
--- Module Name:    counter - Behavioral 
+-- Module Name:    counterClockReductor - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,14 +29,14 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity counter is
+entity counterClockReductor is
     Port ( selector : in  STD_LOGIC_VECTOR (3 downto 0);
            clk : in  STD_LOGIC;
            step : out  STD_LOGIC_VECTOR (1 downto 0);
            leds : out  STD_LOGIC_VECTOR (3 downto 0));
-end counter;
+end counterClockReductor;
 
-architecture Behavioral of counter is
+architecture Behavioral of counterClockReductor is
 
 component ULA is
     Port ( selection : in STD_LOGIC_VECTOR (3 downto 0);
@@ -90,33 +90,42 @@ use_ULA: ULA port map (selector, inputV1, inputV2, ledCOut, ledZeroFlag, ledSign
 process(clk)
 
 	VARIABLE showSteps : integer range 3 downto 0 := 0;
+	VARIABLE reductorCount : integer range 50000000 downto 0 := 0;
 
 -- Clock up pulse
 begin
 if (clk'event and clk = '1') then
 
-	if ( showSteps = 0 ) then -- Input1
-		leds <= inputV1;
-		step <= "00";
-	elsif ( showSteps = 1) then -- Input2
-		leds <= inputV2;
-		step <= "01";
-	elsif ( showSteps = 2 ) then -- Result
-		leds <= outputVector;
-		step <= "10";
-	elsif ( showSteps = 3 ) then -- Flags
-		leds(0) <= ledCOut;
-		leds(1) <= ledZeroFlag;
-		leds(2) <= ledSignFlag;
-		leds(3) <= ledOVFlag;
-		step <= "11";
-		counterVector <= counterVector + 1;
-	end if;
-	
-	if ( showSteps = 3 ) then
-		showSteps := 0;
+	if ( reductorCount <= 50000000 ) then
+		reductorCount := reductorCount + 1;
 	else
-		showSteps := showSteps +1;
+
+		if ( showSteps = 0 ) then -- Input1
+			leds <= inputV1;
+			step <= "00";
+		elsif ( showSteps = 1) then -- Input2
+			leds <= inputV2;
+			step <= "01";
+		elsif ( showSteps = 2 ) then -- Result
+			leds <= outputVector;
+			step <= "10";
+		elsif ( showSteps = 3 ) then -- Flags
+			leds(0) <= ledCOut;
+			leds(1) <= ledZeroFlag;
+			leds(2) <= ledSignFlag;
+			leds(3) <= ledOVFlag;
+			step <= "11";
+			counterVector <= counterVector + 1;
+		end if;
+		
+		if ( showSteps = 3 ) then
+			showSteps := 0;
+		else
+			showSteps := showSteps +1;
+		end if;
+	
+		reductorCount := 0;
+	
 	end if;
 	
 end if;
